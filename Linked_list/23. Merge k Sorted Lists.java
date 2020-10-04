@@ -3,43 +3,11 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-// O(nLogk) space O(k) and O(n) dfor priority queue
-class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
-        //min heap
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(
-            new Comparator<ListNode>()
-            {
-                @Override
-                public int compare(ListNode a, ListNode b) 
-                { 
-                    return a.val - b.val; 
-                } 
-            }
-        );
-        for(ListNode list: lists){
-          if(list!=null)
-              pq.add(list);  
-        } 
-        ListNode res = new ListNode(0);
-        
-        ListNode cur = res;
-        while(!pq.isEmpty())
-        {
-            cur.next = pq.poll();
-            cur = cur.next;
-            if(cur.next!=null) 
-                pq.add(cur.next);
-        }
-        return res.next;
-    }
-}
-
-//Divide and conqure
-// O(Nlogk) , space O(1) 
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         int interval =1;

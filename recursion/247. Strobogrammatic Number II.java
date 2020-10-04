@@ -1,5 +1,5 @@
 //DFS
-ublic List<String> findStrobogrammatic(int n) {
+public List<String> findStrobogrammatic(int n) {
     this.n = n;//use n to avoid append 0 in the first recursion
     List<String> result = new ArrayList<String>();
     DFS(result, "", "", n);

@@ -72,8 +72,10 @@ public int[][] kClosest(int[][] points, int K) {
 private int helper(int[][] A, int l, int r) {
     int[] pivot = A[l];
     while (l < r) {
+        //shift elements at shorter distance to left
         while (l < r && compare(A[r], pivot) >= 0) r--;
         A[l] = A[r];
+        //shift elements at larger distance to right
         while (l < r && compare(A[l], pivot) <= 0) l++;
         A[r] = A[l];
     }
