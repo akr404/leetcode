@@ -3,6 +3,7 @@ class Solution {
         Stack<String> st = new Stack<>();
         HashSet<String> skip = new HashSet<>(Arrays.asList("..", ".", ""));
         
+        //push into stack
         for(String dir: path.split("/"))
         {
             if(dir.equals("..") && !st.empty()) st.pop();
@@ -15,7 +16,7 @@ class Solution {
             }
         }
         StringBuilder sb = new StringBuilder();
-        
+        //take out of stack append /
         for(String dir: st)
         {
             sb.append("/"+dir );

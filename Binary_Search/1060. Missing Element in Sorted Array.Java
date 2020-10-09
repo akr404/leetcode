@@ -10,25 +10,27 @@ Output: 5
 Explanation: 
 The first missing number is 5.
 */
+public int missingElement(int[] nums, int k) {
+        int len = nums.length;
+        int lo = 0, hi = len - 1;
+        int countMissing = nums[len - 1] - nums[0] + 1 - len;
 
-class Solution {
-    public int missingElement(int[] A, int k) {
-        int left = 1, right = A.length;
-        int target = A[0] + k;
-        //avoid binary search if k > last missing
-        int num = A[right - 1] - A[0] - right + 1;
-        if (num < k) {
-            return A[right - 1] - num + k;
+        if (countMissing < k) {
+            return nums[len - 1] + k - countMissing;
         }
-        //binary search
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (A[mid] <= target + mid - 1) {
-                left = mid + 1;
-            } else {
-                right = mid;
+
+        while (lo < hi - 1) {
+            int mid = lo + (hi - lo) / 2;
+            int newCountMissing = nums[mid] - nums[lo] - (mid - lo);
+            // when the number is larger than k, then the index won't be located in (m, h]
+            if (newCountMissing >= k) {
+                hi = mid;
+            }// when the number is smaller than k, then the index won't be located in [l, m), update k -= missing 
+            else {
+                k -= newCountMissing;
+                lo = mid;
             }
         }
-        return target + left - 1;
+
+        return nums[lo] + k;
     }
-}

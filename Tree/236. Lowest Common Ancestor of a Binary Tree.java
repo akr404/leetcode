@@ -19,7 +19,7 @@ class Solution {
 }
 
 
-
+//BFS
 public class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         Map<TreeNode, TreeNode> parent = new HashMap<>();
@@ -27,6 +27,7 @@ public class Solution {
         parent.put(root, null);
         stack.push(root);
 
+        //push all elements and parent hashMap
         while (!parent.containsKey(p) || !parent.containsKey(q)) {
             TreeNode node = stack.pop();
             if (node.left != null) {
@@ -38,11 +39,13 @@ public class Solution {
                 stack.push(node.right);
             }
         }
+        //add parents of P to set
         Set<TreeNode> ancestors = new HashSet<>();
         while (p != null) {
             ancestors.add(p);
             p = parent.get(p);
         }
+        // if set contains parent of Q, return
         while (!ancestors.contains(q))
             q = parent.get(q);
         return q;

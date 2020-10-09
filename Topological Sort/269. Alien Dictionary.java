@@ -1,4 +1,5 @@
-public String alienOrder(String[] words) {
+class Solution {
+    public String alienOrder(String[] words) {
     
     // Step 0: Create data structures and find all unique letters.
     Map<Character, List<Character>> adjList = new HashMap<>();
@@ -18,7 +19,7 @@ public String alienOrder(String[] words) {
         if (word1.length() > word2.length() && word1.startsWith(word2)) {
             return "";
         }
-        // Find the first non match and insert the corresponding relation.
+        // Find the first non match and insert the corresponding relation,build adjeceny list.
         for (int j = 0; j < Math.min(word1.length(), word2.length()); j++) {
             if (word1.charAt(j) != word2.charAt(j)) {
                 //add adjecency list
@@ -56,4 +57,5 @@ public String alienOrder(String[] words) {
         return "";
     }
     return sb.toString();
+    }
 }
